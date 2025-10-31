@@ -1,0 +1,60 @@
+import React, { useState } from 'react';
+
+function LoginForm() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!username || !password) {
+            setError('Both fields are required');
+            return;
+        }
+        setError('');
+        console.log('Username:', username);
+        console.log('Password:', password);
+    };
+
+    return (
+        <div>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    );
+}
+
+export default LoginForm;
+
+// Include in App.js
+import React from 'react';
+import LoginForm from './LoginForm';
+
+function App() {
+    return (
+        <div className="App">
+            <LoginForm />
+        </div>
+    );
+}
+
+export default App;
